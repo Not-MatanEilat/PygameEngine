@@ -6,6 +6,8 @@ from engine.colors import BLACK
 from engine.ui.text.dynamic_font import DynamicFont
 from engine.ui.text.text import Text
 
+DEFAULT_ANTI_ALIAS = False
+
 DEFAULT_FONT_NAME = 'Comic Sans MS'
 
 DEFAULT_TEXT = "<place holder>"
@@ -22,6 +24,7 @@ class TextBuilder:
         self._color = DEFAULT_COLOR
         self._size = DEFAULT_SIZE
         self._font_name = DEFAULT_FONT_NAME
+        self._anti_alias = DEFAULT_ANTI_ALIAS
 
     def set_text(self, text: str) -> 'TextBuilder':
         self._text = text
@@ -39,6 +42,10 @@ class TextBuilder:
         self._font_name = font
         return self
 
+    def set_anti_alias(self, anti_alias: bool) -> 'TextBuilder':
+        self._anti_alias = anti_alias
+        return self
+
     def create_text(self) -> Text:
         return Text(
             text=self._text,
@@ -47,5 +54,6 @@ class TextBuilder:
                 font_name=self._font_name,
                 size=self._size
             ),
-            color=self._color
+            color=self._color,
+            anti_alias=self._anti_alias
         )

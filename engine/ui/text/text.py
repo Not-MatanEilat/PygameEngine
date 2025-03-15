@@ -11,14 +11,15 @@ from engine.ui.view import View
 
 
 class Text(View, Sprite, OnClickListener):
-    def __init__(self, text: str, rect: Rect, font: DynamicFont, color: Tuple):
+    def __init__(self, text: str, rect: Rect, font: DynamicFont, color: Tuple, anti_alias: bool):
         self._text = text
         self._rect = rect
 
         self._font = font
         self._color = color
+        self._anti_alias = anti_alias
 
-        self._text_surface = font.get_font().render(text=text, antialias=False, color=color)
+        self._text_surface = font.get_font().render(text=text, antialias=anti_alias, color=color)
 
         self._on_click: Optional[Callable[[None], None]] = None
 
@@ -39,21 +40,21 @@ class Text(View, Sprite, OnClickListener):
         self._on_click = func
 
     def set_text(self, text: str) -> None:
-        self._text_surface = self._font.get_font().render(text=text, antialias=False, color=self._color)
+        self._text_surface = self._font.get_font().render(text=text, antialias=self._anti_alias, color=self._color)
         self._text = text
 
     def get_text(self) -> str:
         return self._text
 
     def set_font(self, font: pygame.Font) -> None:
-        self._text_surface = font.render(text=self._text, antialias=False, color=self._color)
+        self._text_surface = font.render(text=self._text, antialias=self._anti_alias, color=self._color)
         self._font = font
 
     def get_font(self) -> pygame.Font:
         return self._font.get_font()
 
     def set_color(self, color: Tuple) -> None:
-        self._text_surface = self._font.get_font().render(text=self._text, antialias=False, color=color)
+        self._text_surface = self._font.get_font().render(text=self._text, antialias=self._anti_alias, color=color)
         self._color = color
 
     def get_color(self) -> Tuple:
