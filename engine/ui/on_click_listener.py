@@ -1,14 +1,16 @@
 from abc import ABC, abstractmethod
-from typing import Callable, List
+from typing import Callable, List, Optional
 
 import pygame
+
+OnClickCallable = Callable[[], None]
 
 
 class OnClickListener(ABC):
 
     @abstractmethod
-    def set_on_click_listener(self, func: Callable[[], None]) -> None:
-        raise NotImplementedError()
+    def set_on_click_listener(self, on_click_callable: OnClickCallable) -> None:
+        ...
 
 
 def is_clicked(events: List[pygame.event.Event]) -> bool:
@@ -19,7 +21,7 @@ def is_clicked(events: List[pygame.event.Event]) -> bool:
     return False
 
 
-def observe(on_click: Callable[[], None], observed_rect: pygame.Rect, events: List[pygame.event.Event]) -> None:
+def observe(on_click: OnClickCallable, observed_rect: pygame.Rect, events: List[pygame.event.Event]) -> None:
     if not is_clicked(events):
         return
 

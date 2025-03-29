@@ -1,3 +1,7 @@
+from typing import Tuple
+
+Color = Tuple[int, int, int]
+
 ALICEBLUE = (240, 248, 255)
 ANTIQUEWHITE = (250, 235, 215)
 ANTIQUEWHITE1 = (255, 239, 219)

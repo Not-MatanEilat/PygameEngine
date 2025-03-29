@@ -1,15 +1,16 @@
-from typing import List, Tuple
+from typing import List
 
 import pygame.event
 from pygame import Surface, Rect
 
+from engine.colors import Color
 from engine.sprite.position import Position, to_position
 from engine.sprite.sprite import Sprite
 from engine.ui.view import View
 
 
 class RectangleSurface(View, Sprite):
-    def __init__(self, rect: Rect, color: Tuple):
+    def __init__(self, rect: Rect, color: Color):
         self._rect = rect
         self._color = color
 

@@ -1,16 +1,17 @@
-from typing import List, Tuple
+from typing import List
 
 import pygame.event
 from pygame import Surface
 
+from engine.colors import Color
 from engine.sprite.position import Position
 from engine.sprite.sprite import Sprite
-from engine.ui.shapes.Circle import Circle
+from engine.ui.shapes.circle import Circle
 from engine.ui.view import View
 
 
 class CircleSurface(View, Sprite):
-    def __init__(self, circle: Circle, color: Tuple):
+    def __init__(self, circle: Circle, color: Color):
         self._circle = circle
         self._color = color
 

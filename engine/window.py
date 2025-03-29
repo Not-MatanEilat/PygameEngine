@@ -2,9 +2,11 @@ from typing import Tuple
 
 import pygame
 
+from engine.colors import Color
+
 
 class Window:
-    def __init__(self, screen: pygame.Surface, caption: str, background_color: Tuple):
+    def __init__(self, screen: pygame.Surface, caption: str, background_color: Color):
         self.screen = screen
         self.caption = caption
         self.background_color = background_color

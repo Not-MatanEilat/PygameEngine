@@ -3,15 +3,16 @@ from typing import Tuple, Callable, Optional, List
 import pygame.font
 from pygame import Surface, Rect
 
+from engine.colors import Color
 from engine.sprite.position import Position, to_position
 from engine.sprite.sprite import Sprite
-from engine.ui.on_click_listener import OnClickListener, observe
+from engine.ui.on_click_listener import OnClickListener, observe, OnClickCallable
 from engine.ui.text.dynamic_font import DynamicFont
 from engine.ui.view import View
 
 
 class Text(View, Sprite, OnClickListener):
-    def __init__(self, text: str, rect: Rect, font: DynamicFont, color: Tuple, anti_alias: bool):
+    def __init__(self, text: str, rect: Rect, font: DynamicFont, color: Color, anti_alias: bool):
         self._text = text
         self._rect = rect
 
@@ -21,7 +22,7 @@ class Text(View, Sprite, OnClickListener):
 
         self._text_surface = font.get_font().render(text=text, antialias=anti_alias, color=color)
 
-        self._on_click: Optional[Callable[[None], None]] = None
+        self._on_click: Optional[OnClickCallable] = None
 
     def on_tick(self) -> None:
         pass
@@ -36,8 +37,8 @@ class Text(View, Sprite, OnClickListener):
     def get_position(self) -> Position:
         return to_position(self._rect)
 
-    def set_on_click_listener(self, func: Callable[[], None]) -> None:
-        self._on_click = func
+    def set_on_click_listener(self, on_click_callable: OnClickCallable) -> None:
+        self._on_click = on_click_callable
 
     def set_text(self, text: str) -> None:
         self._text_surface = self._font.get_font().render(text=text, antialias=self._anti_alias, color=self._color)
@@ -53,11 +54,11 @@ class Text(View, Sprite, OnClickListener):
     def get_font(self) -> pygame.Font:
         return self._font.get_font()
 
-    def set_color(self, color: Tuple) -> None:
+    def set_color(self, color: Color) -> None:
         self._text_surface = self._font.get_font().render(text=self._text, antialias=self._anti_alias, color=color)
         self._color = color
 
-    def get_color(self) -> Tuple:
+    def get_color(self) -> Color:
         return self._color
 
     def set_size(self, size: int) -> None:

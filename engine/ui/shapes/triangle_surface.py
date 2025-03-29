@@ -1,16 +1,17 @@
-from typing import List, Tuple
+from typing import List
 
 import pygame.event
 from pygame import Surface
 
+from engine.colors import Color
 from engine.sprite.position import Position
 from engine.sprite.sprite import Sprite
-from engine.ui.shapes.Triangle import Triangle, to_triangle_points, get_middle
+from engine.ui.shapes.triangle import Triangle, to_triangle_points, get_middle
 from engine.ui.view import View
 
 
 class TriangleSurface(View, Sprite):
-    def __init__(self, triangle: Triangle, color: Tuple):
+    def __init__(self, triangle: Triangle, color: Color):
         self._triangle = triangle
         self._color = color
 

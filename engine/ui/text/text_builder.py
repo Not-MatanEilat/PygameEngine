@@ -1,8 +1,6 @@
-from typing import Tuple
-
 import pygame
 
-from engine.colors import BLACK
+from engine.colors import BLACK, Color
 from engine.ui.text.dynamic_font import DynamicFont
 from engine.ui.text.text import Text
 
@@ -30,7 +28,7 @@ class TextBuilder:
         self._text = text
         return self
 
-    def set_color(self, color: Tuple) -> 'TextBuilder':
+    def set_color(self, color: Color) -> 'TextBuilder':
         self._color = color
         return self
 
