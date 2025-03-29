@@ -1,8 +1,12 @@
+from pathlib import Path
+
 import pygame
 
 from engine.colors import WHITE, RED, GREEN, BLUE
 from engine.timer.timer import Timer
 from engine.ui.button.button import Button
+from engine.ui.image.image import Image
+from engine.ui.image.image_builder import ImageBuilder
 from engine.ui.shapes.circle import Circle
 from engine.ui.shapes.circle_surface import CircleSurface
 from engine.ui.shapes.rectangle_surface import RectangleSurface
@@ -31,14 +35,20 @@ def main():
     triangle_surface = TriangleSurface(Triangle(255, 30, 450, 300, 222, 300), GREEN)
     circle_surface = CircleSurface(Circle(255, 445, 35), BLUE)
 
+    image = ImageBuilder(pygame.Rect(50, 50, 250, 250)).create_image()
+
+    image.set_on_click_listener(lambda:
+                                Timer(lambda: print("yo sir"), 1)
+                                .start())
+
     running = True
     while running:
         window.screen.fill(window.background_color)
 
-        button.draw(screen)
+        image.draw(screen)
         # for loop through the event queue
         events = pygame.event.get()
-        button.on_event_tick(events)
+        image.on_event_tick(events)
         for event in events:
 
             # Check for QUIT event

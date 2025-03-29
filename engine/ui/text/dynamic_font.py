@@ -22,4 +22,3 @@ class DynamicFont:
 
     def set_size(self, size: int) -> None:
         self._font = pygame.font.SysFont(self._font_name, size)
-
