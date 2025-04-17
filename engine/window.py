@@ -3,6 +3,7 @@ from typing import Tuple
 import pygame
 
 from engine.colors import Color
+from engine.logger.logger import EngineLogger
 from engine.screen.base_screen import BaseScreen
 
 
@@ -17,3 +18,4 @@ class Window:
 
     def run(self) -> None:
         self.starting_screen.run()
+        EngineLogger.info("leavening game...")
