@@ -3,6 +3,7 @@ from pathlib import Path
 import pygame
 
 from engine.colors import WHITE, RED, GREEN, BLUE
+from engine.component.test_component import TestComponent
 from engine.screen.main_menu_screen import MainMenuScreen
 from engine.timer.timer import Timer
 from engine.ui.button.button import Button
@@ -25,14 +26,8 @@ def main():
     window = Window(start_screen=MainMenuScreen(screen), display=screen, caption="test")
     window.init()
 
-    text = TextBuilder(pygame.Rect(25, 25, 250, 100)).set_text("messi").create_text()
-
-    button = Button(rect=pygame.Rect(25, 25, 250, 100), text=text, background_color=RED)
-
-    button.set_on_click_listener(lambda:
-                                 Timer(lambda: print("yo sir"), 1)
-                                 .start())
     window.run()
+
 
     #
     # rect_surface = RectangleSurface(pygame.Rect(225, 25, 250, 100), RED)

@@ -18,4 +18,4 @@ class Window:
 
     def run(self) -> None:
         self.starting_screen.run()
-        EngineLogger.info("leavening game...")
+        EngineLogger.info("Quitting window...")

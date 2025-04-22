@@ -4,8 +4,22 @@ from typing import List
 
 import pygame.event
 
+from engine.game_object.game_object import GameObject
+
 
 class BaseScreen(ABC):
+    def __init__(self):
+        self._game_objects: List[GameObject] = []
+
+    def add_game_object(self, game_object: GameObject) -> None:
+        self._game_objects.append(game_object)
+
+    def get_game_objects(self) -> List[GameObject]:
+        return self._game_objects
+
+    def tick_game_objects(self) -> None:
+        for game_object in self._game_objects:
+            game_object.tick_components()
 
     @abstractmethod
     def run(self) -> None:
@@ -23,3 +37,7 @@ def start_screen(current_screen: BaseScreen, screen_to_start: BaseScreen, finish
         current_screen.finish()
 
     screen_to_start.run()
+
+def init_screen(screen: BaseScreen) -> None:
+    for game_object in screen.get_game_objects():
+        game_object.init()
