@@ -3,6 +3,10 @@ from typing import Callable, List, Optional
 
 import pygame
 
+from engine.component.transform_component.position import Position
+from engine.component.transform_component.transform_component import TransformComponent
+from engine.mouse.mouse_manager import MouseManager
+
 OnClickCallable = Callable[[], None]
 
 
@@ -21,11 +25,11 @@ def is_clicked(events: List[pygame.event.Event]) -> bool:
     return False
 
 
-def observe(on_click: OnClickCallable, observed_rect: pygame.Rect, events: List[pygame.event.Event]) -> None:
+def observe(on_click: OnClickCallable, observed_transform: TransformComponent, events: List[pygame.event.Event]) -> None:
     if not is_clicked(events):
         return
 
-    mouse_x, mouse_y = pygame.mouse.get_pos()
+    mouse_position = MouseManager.get_mouse_position()
 
-    if observed_rect.collidepoint(mouse_x, mouse_y):
+    if observed_transform.collide_point(Position(mouse_position.x, mouse_position.y)):
         on_click()

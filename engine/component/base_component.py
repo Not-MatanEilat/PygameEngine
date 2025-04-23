@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Optional, Type
+from typing import TYPE_CHECKING, Optional, Type, List
+
+import pygame.event
 
 if TYPE_CHECKING:
     from engine.game_object.game_object import GameObject
@@ -24,4 +26,8 @@ class BaseComponent(ABC):
 
     @abstractmethod
     def on_tick(self) -> None:
+        ...
+
+    @abstractmethod
+    def on_event_tick(self, events: List[pygame.event.Event]) -> None:
         ...

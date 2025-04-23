@@ -4,10 +4,7 @@ import pygame.event
 from pygame import Surface
 
 from engine.colors import Color
-from engine.sprite.position import Position, to_position
-from engine.sprite.sprite import Sprite
 from engine.ui.on_click_listener import OnClickListener, observe, OnClickCallable
-from engine.ui.text.text import Text
 from engine.ui.view import View
 
 

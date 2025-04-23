@@ -5,6 +5,7 @@ from typing import List
 import pygame.event
 
 from engine.game_object.game_object import GameObject
+from engine.logger.logger import EngineLogger
 
 
 class BaseScreen(ABC):
@@ -20,6 +21,11 @@ class BaseScreen(ABC):
     def tick_game_objects(self) -> None:
         for game_object in self._game_objects:
             game_object.tick_components()
+
+    def event_tick_game_objects(self, events: List[pygame.event.Event]) -> None:
+        for game_object in self._game_objects:
+            game_object.event_tick_components(events)
+
 
     @abstractmethod
     def run(self) -> None:
@@ -39,5 +45,6 @@ def start_screen(current_screen: BaseScreen, screen_to_start: BaseScreen, finish
     screen_to_start.run()
 
 def init_screen(screen: BaseScreen) -> None:
+    EngineLogger.info("Initiating current screen")
     for game_object in screen.get_game_objects():
         game_object.init()

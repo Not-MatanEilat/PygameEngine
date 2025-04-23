@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import List, Type
 
+import pygame.event
+
 from engine.component.base_component import BaseComponent
 from engine.game_object.exceptions import DuplicateComponentException, ComponentNotFoundException
 
@@ -25,6 +27,10 @@ class GameObject():
     def tick_components(self) -> None:
         for component in self.__components:
             component.on_tick()
+
+    def event_tick_components(self, events: List[pygame.event.Event]) -> None:
+        for component in self.__components:
+            component.on_event_tick(events)
 
     def add_component(self, component: BaseComponent) -> None:
         if is_component_type_in_list(type(component), self.__components):

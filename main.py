@@ -3,18 +3,7 @@ from pathlib import Path
 import pygame
 
 from engine.colors import WHITE, RED, GREEN, BLUE
-from engine.component.test_component import TestComponent
 from engine.screen.main_menu_screen import MainMenuScreen
-from engine.timer.timer import Timer
-from engine.ui.button.button import Button
-from engine.ui.image.image import Image
-from engine.ui.image.image_builder import ImageBuilder
-from engine.ui.shapes.circle import Circle
-from engine.ui.shapes.circle_surface import CircleSurface
-from engine.ui.shapes.rectangle_surface import RectangleSurface
-from engine.ui.shapes.triangle import Triangle
-from engine.ui.shapes.triangle_surface import TriangleSurface
-from engine.ui.text.text_builder import TextBuilder
 from engine.window import Window
 
 

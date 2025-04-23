@@ -2,15 +2,13 @@ import pygame
 
 from engine.colors import RED, WHITE
 from engine.screen.base_screen import BaseScreen, check_quit
-from engine.ui.shapes.rectangle_surface import RectangleSurface
-from engine.ui.text.text_builder import TextBuilder
 
 
 class TestScreen(BaseScreen):
     def __init__(self, display_screen: pygame.Surface):
         self._running = True
         self._display_screen = display_screen
-        self._text = TextBuilder(pygame.Rect(125, 125, 250, 120)). \
+        self._text = TextComponentBuilder(pygame.Rect(125, 125, 250, 120)). \
             set_text("test screen"). \
             create_text()
         self._text.set_on_click_listener(lambda: self.finish())

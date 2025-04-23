@@ -1,20 +1,17 @@
-from typing import Tuple, Callable, Optional, List
+from typing import List
 
-import pygame.font
-from pygame import Surface, Rect
+import pygame
 
 from engine.colors import Color
-from engine.sprite.position import Position, to_position
-from engine.sprite.sprite import Sprite
-from engine.ui.on_click_listener import OnClickListener, observe, OnClickCallable
-from engine.ui.text.dynamic_font import DynamicFont
-from engine.ui.view import View
+from engine.component.base_component import BaseComponent
+from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.ui_components.text_component.dynamic_font import DynamicFont
 
 
-class Text(View, Sprite, OnClickListener):
-    def __init__(self, text: str, rect: Rect, font: DynamicFont, color: Color, anti_alias: bool):
+class TextComponent(BaseComponent):
+    def __init__(self, text: str, font: DynamicFont, color: Color, anti_alias: bool):
+        super().__init__()
         self._text = text
-        self._rect = rect
 
         self._font = font
         self._color = color
@@ -22,23 +19,16 @@ class Text(View, Sprite, OnClickListener):
 
         self._text_surface = font.get_font().render(text=text, antialias=anti_alias, color=color)
 
-        self._on_click: Optional[OnClickCallable] = None
+        self.transform_component: TransformComponent = None
 
     def on_tick(self) -> None:
         pass
 
     def on_event_tick(self, events: List[pygame.event.Event]) -> None:
-        if self._on_click:
-            observe(self._on_click, self._rect, events)
+        pass
 
-    def draw(self, screen: Surface) -> None:
-        screen.blit(self._text_surface, self._rect)
-
-    def get_position(self) -> Position:
-        return to_position(self._rect)
-
-    def set_on_click_listener(self, on_click_callable: OnClickCallable) -> None:
-        self._on_click = on_click_callable
+    def start(self) -> None:
+        self.transform_component = self.get_component(TransformComponent)
 
     def set_text(self, text: str) -> None:
         self._text_surface = self._font.get_font().render(text=text, antialias=self._anti_alias, color=self._color)
