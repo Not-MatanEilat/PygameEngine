@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Callable, List, Optional
+from typing import Callable, List
 
 import pygame
 
 from engine.component.transform_component.position import Position
 from engine.component.transform_component.transform_component import TransformComponent
-from engine.mouse.mouse_manager import MouseManager
 
 OnClickCallable = Callable[[], None]
 

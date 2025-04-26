@@ -1,6 +1,7 @@
 from engine.component.transform_component.position import Position
 from engine.component.transform_component.rotation import Rotation
 from engine.component.transform_component.scale import Scale
+from engine.component.transform_component.transform import Transform
 from engine.component.transform_component.transform_component import TransformComponent
 
 
@@ -24,7 +25,8 @@ class TransformComponentBuilder:
 
     def create_component(self) -> TransformComponent:
         return TransformComponent(
-            position=self._position,
-            rotation=self._rotation,
-            scale=self._scale
+            transform=Transform(
+                position=self._position,
+                rotation=self._rotation,
+                scale=self._scale)
         )

@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import List, Type
+from typing import List, Type, TYPE_CHECKING
 
-import pygame.event
-
-from engine.component.base_component import BaseComponent
 from engine.game_object.exceptions import DuplicateComponentException, ComponentNotFoundException
+from events.event_tick import EventTick
 
+if TYPE_CHECKING:
+    from engine.component.base_component import BaseComponent
 
-class GameObject():
+class GameObject:
     def __init__(self):
         self.__components: List[BaseComponent] = []
 
@@ -24,13 +24,9 @@ class GameObject():
         for component in self.__components:
             component.start()
 
-    def tick_components(self) -> None:
+    def tick_components(self, event_tick: EventTick) -> None:
         for component in self.__components:
-            component.on_tick()
-
-    def event_tick_components(self, events: List[pygame.event.Event]) -> None:
-        for component in self.__components:
-            component.on_event_tick(events)
+            component.on_tick(event_tick)
 
     def add_component(self, component: BaseComponent) -> None:
         if is_component_type_in_list(type(component), self.__components):

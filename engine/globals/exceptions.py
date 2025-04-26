@@ -1,0 +1,2 @@
+class GlobalsNotInitiatedException(Exception):
+    pass

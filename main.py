@@ -2,8 +2,12 @@ from pathlib import Path
 
 import pygame
 
-from engine.colors import WHITE, RED, GREEN, BLUE
-from engine.screen.main_menu_screen import MainMenuScreen
+from engine.colors import WHITE
+from engine.game_object.builder.test_game_object_builder import TestGameObjectBuilder
+from engine.globals.canvas.canvas_manager import CanvasManager
+from engine.globals.canvas.canvas_wrapper.pygame_canvas_wrapper import PygameCanvasWrapper
+from engine.globals.global_manager import GlobalManager
+from engine.screen.screen import Screen
 from engine.window import Window
 
 
@@ -12,7 +16,12 @@ def main():
 
     pygame.font.init()
 
-    window = Window(start_screen=MainMenuScreen(screen), display=screen, caption="test")
+    window = Window(caption="test",
+                    global_manager=GlobalManager(
+                        canvas_manager=CanvasManager(
+                            canvas_wrapper=PygameCanvasWrapper(screen),
+                            default_background_color=WHITE),
+                        starter_screen=Screen([TestGameObjectBuilder.create()])))
     window.init()
 
     window.run()

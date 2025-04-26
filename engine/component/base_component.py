@@ -2,12 +2,11 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Optional, Type, List
+from typing import TYPE_CHECKING, Type
 
-import pygame.event
 
-if TYPE_CHECKING:
-    from engine.game_object.game_object import GameObject
+from events.event_tick import EventTick
+from engine.game_object.game_object import GameObject
 
 
 class BaseComponent(ABC):
@@ -15,19 +14,15 @@ class BaseComponent(ABC):
         self._game_object: GameObject = None
 
     def get_component(self, component_type: Type[BaseComponent]) -> BaseComponent:
-        return self._entity.get_component(component_type)
+        return self._game_object.get_component(component_type)
 
     def set_game_object(self, entity: GameObject) -> None:
-        self._entity = entity
+        self._game_object = entity
 
     @abstractmethod
     def start(self) -> None:
         ...
 
     @abstractmethod
-    def on_tick(self) -> None:
-        ...
-
-    @abstractmethod
-    def on_event_tick(self, events: List[pygame.event.Event]) -> None:
+    def on_tick(self, event_tick: EventTick) -> None:
         ...
