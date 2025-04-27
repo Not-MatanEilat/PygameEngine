@@ -2,60 +2,37 @@ from pathlib import Path
 
 import pygame
 
-from engine.colors import WHITE, RED, GREEN, BLUE
-from engine.screen.main_menu_screen import MainMenuScreen
-from engine.timer.timer import Timer
-from engine.ui.button.button import Button
-from engine.ui.image.image import Image
-from engine.ui.image.image_builder import ImageBuilder
-from engine.ui.shapes.circle import Circle
-from engine.ui.shapes.circle_surface import CircleSurface
-from engine.ui.shapes.rectangle_surface import RectangleSurface
-from engine.ui.shapes.triangle import Triangle
-from engine.ui.shapes.triangle_surface import TriangleSurface
-from engine.ui.text.text_builder import TextBuilder
+from engine.colors import WHITE, ORANGE, RED, YELLOW1
+from engine.game_object.builder.rectangle_game_object_creator import RectangleGameObjectCreator
+from engine.game_object.builder.test_game_object_creator import TestGameObjectCreator
+from engine.globals.canvas.canvas_manager import CanvasManager
+from engine.globals.canvas.draw_manager import DrawManager
+from engine.globals.global_manager import GlobalManager
+from engine.screen.screen import Screen
 from engine.window import Window
 
 
 def main():
-    screen = pygame.display.set_mode((1200, 800))
+    canvas_surface = pygame.display.set_mode((1200, 800))
 
-    pygame.font.init()
+    pygame.init()
 
-    window = Window(start_screen=MainMenuScreen(screen), display=screen, caption="test")
+    screen = Screen([
+        # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
+        # RectangleGameObjectCreator.create(RED, 4, 50, 25),
+        # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
+        TestGameObjectCreator.create()
+    ])
+
+    window = Window(caption="test",
+                    global_manager=GlobalManager(
+                        canvas_manager=CanvasManager(
+                            draw_manager=DrawManager(canvas_surface),
+                            default_background_color=WHITE),
+                        starter_screen=screen))
     window.init()
 
-    text = TextBuilder(pygame.Rect(25, 25, 250, 100)).set_text("messi").create_text()
-
-    button = Button(rect=pygame.Rect(25, 25, 250, 100), text=text, background_color=RED)
-
-    button.set_on_click_listener(lambda:
-                                 Timer(lambda: print("yo sir"), 1)
-                                 .start())
     window.run()
-
-    #
-    # rect_surface = RectangleSurface(pygame.Rect(225, 25, 250, 100), RED)
-    # triangle_surface = TriangleSurface(Triangle(255, 30, 450, 300, 222, 300), GREEN)
-    # circle_surface = CircleSurface(Circle(255, 445, 35), BLUE)
-    #
-    #
-    #
-    #
-    # running = True
-    # while running:
-    #     window.display_screen.fill(window.background_color)
-    #
-    #     # for loop through the event queue
-    #     events = pygame.event.get()
-    #     triangle_surface.draw(screen)
-    #     for event in events:
-    #
-    #         # Check for QUIT event
-    #         if event.type == pygame.QUIT:
-    #             running = False
-    #
-    #     pygame.display.flip()
 
 
 if __name__ == "__main__":

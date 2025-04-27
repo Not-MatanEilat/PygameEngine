@@ -1,8 +1,10 @@
+
 import pygame
 
 from engine.colors import BLACK, Color
-from engine.ui.text.dynamic_font import DynamicFont
-from engine.ui.text.text import Text
+from engine.component.ui_components.text_component.dynamic_font import DynamicFont
+from engine.component.ui_components.text_component.text import Text
+from engine.component.ui_components.text_component.text_component import TextComponent
 
 DEFAULT_ANTI_ALIAS = False
 
@@ -16,8 +18,7 @@ DEFAULT_SIZE = 30
 
 
 class TextBuilder:
-    def __init__(self, rect: pygame.Rect):
-        self._rect = rect
+    def __init__(self):
         self._text = DEFAULT_TEXT
         self._color = DEFAULT_COLOR
         self._size = DEFAULT_SIZE
@@ -45,13 +46,18 @@ class TextBuilder:
         return self
 
     def create_text(self) -> Text:
-        return Text(
-            text=self._text,
-            rect=self._rect,
-            font=DynamicFont(
+        dynamic_font = DynamicFont(
                 font_name=self._font_name,
-                size=self._size
-            ),
+                size=self._size,
+            )
+
+        return Text(
+            string=self._text,
+            font=dynamic_font,
+            text_surface=dynamic_font.get_font().render(
+                text=self._text,
+                antialias=self._anti_alias,
+                color=self._color),
             color=self._color,
             anti_alias=self._anti_alias
         )

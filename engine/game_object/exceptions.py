@@ -1,0 +1,6 @@
+
+class DuplicateComponentException(Exception):
+    ...
+
+class ComponentNotFoundException(Exception):
+    ...

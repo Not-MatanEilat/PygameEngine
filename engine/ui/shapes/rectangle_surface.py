@@ -4,8 +4,6 @@ import pygame.event
 from pygame import Surface, Rect
 
 from engine.colors import Color
-from engine.sprite.position import Position, to_position
-from engine.sprite.sprite import Sprite
 from engine.ui.view import View
 
 

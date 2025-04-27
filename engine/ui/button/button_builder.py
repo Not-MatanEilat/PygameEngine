@@ -3,7 +3,7 @@ import pygame
 from engine.colors import RED, Color
 from engine.ui.button.button import Button
 
-from engine.ui.text.text_builder import TextBuilder
+from engine.ui.text.text_component_builder import TextComponentBuilder
 
 DEFAULT_BACKGROUND_COLOR = RED
 
@@ -11,7 +11,7 @@ DEFAULT_BACKGROUND_COLOR = RED
 class ButtonBuilder:
     def __init__(self, rect: pygame.Rect):
         self._rect = rect
-        self._text = TextBuilder(rect).create_text()
+        self._text = TextComponentBuilder(rect).create_text()
 
         self._background_color = DEFAULT_BACKGROUND_COLOR
 
