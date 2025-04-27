@@ -1,11 +1,8 @@
-from typing import List, Optional, Callable
-
-import pygame
+from typing import Callable
 
 from engine.component.base_component import BaseComponent
 from engine.component.transform_component.transform_component import TransformComponent
-from engine.ui.on_click_listener import observe
-from events.event_tick import EventTick
+from engine.events.event_tick import EventTick
 
 OnClickCallable = Callable[[], None]
 

@@ -4,12 +4,12 @@ import pygame.event
 from pygame.key import ScancodeWrapper
 
 from engine.component.transform_component.position import Position
-from events.event_tick import EventTick
-from events.keyboard_events.key import Key
-from events.keyboard_events.key_properties import KeyProperties
-from events.keyboard_events.keyboard_events import KeyboardEvents
-from events.mouse_events.click_properties import ClickProperties
-from events.mouse_events.mouse_events import MouseEvents
+from engine.events.event_tick import EventTick
+from engine.events.keyboard_events.key import Key
+from engine.events.keyboard_events.key_properties import KeyProperties
+from engine.events.keyboard_events.keyboard_events import KeyboardEvents
+from engine.events.mouse_events.click_properties import ClickProperties
+from engine.events.mouse_events.mouse_events import MouseEvents
 
 
 class EventTickCreator:

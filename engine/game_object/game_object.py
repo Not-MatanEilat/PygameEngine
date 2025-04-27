@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import List, Type, TYPE_CHECKING
 
+from engine.events.event_tick import EventTick
 from engine.game_object.exceptions import DuplicateComponentException, ComponentNotFoundException
-from events.event_tick import EventTick
 
 if TYPE_CHECKING:
     from engine.component.base_component import BaseComponent

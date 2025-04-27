@@ -1,7 +1,7 @@
 from typing import Dict
 
-from events.keyboard_events.key import Key
-from events.keyboard_events.key_properties import KeyProperties
+from engine.events.keyboard_events.key import Key
+from engine.events.keyboard_events.key_properties import KeyProperties
 
 
 class KeyboardEvents:

@@ -3,12 +3,12 @@ from typing import List
 import pygame
 
 from engine.collision_checker import CollisionChecker
+from engine.colors import RED
 from engine.component.base_component import BaseComponent
 from engine.component.transform_component.position import Position
 from engine.component.transform_component.transform import Transform
-from engine.component.transform_component.rotation import Rotation
-from engine.component.transform_component.scale import Scale
-from events.event_tick import EventTick
+from engine.events.event_tick import EventTick
+from engine.globals.global_manager import GlobalManager
 
 
 class TransformComponent(BaseComponent):
@@ -21,7 +21,8 @@ class TransformComponent(BaseComponent):
         pass
 
     def on_tick(self, event_tick: EventTick) -> None:
-        pass
+        if GlobalManager.get_instance().debug_mode:
+            GlobalManager.get_instance().get_canvas_manager().draw_rectangle_border(self.transform, RED, 3)
 
     def on_event_tick(self, events: List[pygame.event.Event]) -> None:
         pass

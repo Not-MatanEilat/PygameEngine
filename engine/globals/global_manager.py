@@ -13,9 +13,11 @@ if TYPE_CHECKING:
 class GlobalManager:
     globals_instance = None
 
-    def __init__(self, canvas_manager: CanvasManager, starter_screen: Screen):
+    def __init__(self, canvas_manager: CanvasManager, starter_screen: Screen, debug_mode=False):
         self._canvas_manager = canvas_manager
         self._current_screen = starter_screen
+
+        self.debug_mode = debug_mode
 
         GlobalManager.globals_instance = self
 

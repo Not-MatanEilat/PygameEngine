@@ -2,10 +2,9 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Type
+from typing import Type
 
-
-from events.event_tick import EventTick
+from engine.events.event_tick import EventTick
 from engine.game_object.game_object import GameObject
 
 

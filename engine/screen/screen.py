@@ -1,11 +1,11 @@
-from typing import List, TYPE_CHECKING
+from typing import List
 
 import pygame.event
 
+from engine.events.event_tick import EventTick
 from engine.game_object.game_object import GameObject
 from engine.logger.logger import EngineLogger
-from events.event_tick import EventTick
-from events.event_tick_creator import EventTickCreator
+from engine.events.event_tick_creator import EventTickCreator
 
 from engine.globals.global_manager import GlobalManager
 

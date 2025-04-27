@@ -1,5 +1,5 @@
-from events.keyboard_events.keyboard_events import KeyboardEvents
-from events.mouse_events.mouse_events import MouseEvents
+from engine.events.keyboard_events.keyboard_events import KeyboardEvents
+from engine.events.mouse_events.mouse_events import MouseEvents
 
 from dataclasses import dataclass
 

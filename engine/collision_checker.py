@@ -4,17 +4,15 @@ from engine.component.transform_component.position import Position
 from engine.component.transform_component.transform import Transform
 from engine.component.transform_component.rotation import Rotation
 from engine.component.transform_component.scale import Scale
+from engine.logger.logger import EngineLogger
 
 
 class CollisionChecker:
     @staticmethod
     def rect_collides_point(transform: Transform, point: Position) -> bool:
-        half_width = transform.scale.x / 2
-        half_height = transform.scale.y / 2
-
         return (
-                transform.position.x - half_width <= point.x <= transform.position.x + half_width and
-                transform.position.y - half_height <= point.y <= transform.position.y + half_height
+                transform.position.x - transform.scale.x <= point.x <= transform.position.x + transform.scale.x and
+                transform.position.y - transform.scale.y <= point.y <= transform.position.y + transform.scale.y
         )
 
     @staticmethod
