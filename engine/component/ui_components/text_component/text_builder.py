@@ -1,10 +1,6 @@
-
-import pygame
-
 from engine.colors import BLACK, Color
 from engine.component.ui_components.text_component.dynamic_font import DynamicFont
-from engine.component.ui_components.text_component.text import Text
-from engine.component.ui_components.text_component.text_component import TextComponent
+from engine.globals.canvas.draw_manager.drawables.text import Text
 
 DEFAULT_ANTI_ALIAS = False
 

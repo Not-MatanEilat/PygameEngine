@@ -9,8 +9,9 @@ if TYPE_CHECKING:
     from engine.component.base_component import BaseComponent
 
 class GameObject:
-    def __init__(self):
+    def __init__(self, layer=0):
         self.__components: List[BaseComponent] = []
+        self.__layer = layer
 
     def init(self) -> None:
         self.set_game_object_for_components()
@@ -33,6 +34,9 @@ class GameObject:
             raise DuplicateComponentException("Cannot add the same type of component twice!")
 
         self.__components.append(component)
+
+    def get_layer(self) -> int:
+        return self.__layer
 
     def remove_component(self, component_type: Type[BaseComponent]) -> None:
         if not is_component_type_in_list(component_type, self.__components):

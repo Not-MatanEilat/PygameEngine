@@ -6,11 +6,10 @@ from engine.globals.global_manager import GlobalManager
 
 
 class RectangleRendererComponent(BaseComponent):
-    def __init__(self, color: Color, layer: int):
+    def __init__(self, color: Color):
         super().__init__()
 
         self._color = color
-        self._layer = layer
 
         self._transform_component: TransformComponent = None
 
@@ -18,4 +17,4 @@ class RectangleRendererComponent(BaseComponent):
         self._transform_component = self.get_component(TransformComponent)
 
     def on_tick(self, event_tick: EventTick) -> None:
-        GlobalManager.get_instance().get_canvas_manager().draw_rectangle(self._transform_component.transform, self._color, layer=self._layer)
+        GlobalManager.get_instance().get_canvas_manager().draw_rectangle(self._transform_component.transform, self._color, layer=self.get_layer())

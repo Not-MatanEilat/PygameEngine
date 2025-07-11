@@ -1,13 +1,10 @@
-from pathlib import Path
-
 import pygame
-from pygame import Surface
 
 from engine.colors import Color
 from engine.component.base_component import BaseComponent
 from engine.component.transform_component.transform_component import TransformComponent
 from engine.component.ui_components.text_component.dynamic_font import DynamicFont
-from engine.component.ui_components.text_component.text import Text
+from engine.globals.canvas.draw_manager.drawables.text import Text
 from engine.events.event_tick import EventTick
 from engine.globals.global_manager import GlobalManager
 
@@ -20,7 +17,7 @@ class TextComponent(BaseComponent):
         self.transform_component: TransformComponent = None
 
     def on_tick(self, event_tick: EventTick) -> None:
-        GlobalManager.get_instance().get_canvas_manager().draw_surface(self._text.get_text_surface(), self.transform_component.transform)
+        GlobalManager.get_instance().get_canvas_manager().draw_text(self._text, self.transform_component.transform)
 
     def start(self) -> None:
         self.transform_component = self.get_component(TransformComponent)

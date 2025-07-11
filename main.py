@@ -3,10 +3,11 @@ from pathlib import Path
 import pygame
 
 from engine.colors import WHITE, ORANGE, RED, YELLOW1
-from engine.game_object.builder.rectangle_game_object_creator import RectangleGameObjectCreator
-from engine.game_object.builder.test_game_object_creator import TestGameObjectCreator
+from engine.game_object.creator.rectangle_game_object_creator import RectangleGameObjectCreator
+from engine.game_object.creator.test_game_object_creator import TestGameObjectCreator
+from engine.game_object.ui_creator.text_game_object_creator import TextGameObjectCreator
 from engine.globals.canvas.canvas_manager import CanvasManager
-from engine.globals.canvas.draw_manager import DrawManager
+from engine.globals.canvas.draw_manager.draw_manager import DrawManager
 from engine.globals.global_manager import GlobalManager
 from engine.screen.screen import Screen
 from engine.window import Window
@@ -21,7 +22,7 @@ def main():
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
         # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
-        TestGameObjectCreator.create()
+        TextGameObjectCreator.create("hello")
     ])
 
     window = Window(caption="test",

@@ -18,6 +18,9 @@ class BaseComponent(ABC):
     def set_game_object(self, entity: GameObject) -> None:
         self._game_object = entity
 
+    def get_layer(self) -> int:
+        return self._game_object.get_layer()
+
     @abstractmethod
     def start(self) -> None:
         ...

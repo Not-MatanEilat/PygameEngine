@@ -6,7 +6,9 @@ from pygame import Surface
 
 from engine.colors import Color
 from engine.component.transform_component.transform import Transform
-from engine.globals.canvas.draw_manager import DrawManager
+from engine.globals.canvas.draw_manager.draw_manager import DrawManager
+from engine.globals.canvas.draw_manager.drawables.image import Image
+from engine.globals.canvas.draw_manager.drawables.text import Text
 
 
 class CanvasManager:
@@ -15,9 +17,9 @@ class CanvasManager:
         self._default_background_color = default_background_color
         self._draw_calls: Dict[int, List[Callable]] = defaultdict(list)
 
-    def draw_surface(self, surface: Surface, transform: Transform, layer=0) -> None:
+    def draw_image(self, image: Image, transform: Transform, layer=0) -> None:
         self._draw_calls[layer].append(
-            lambda: self._draw_manager.draw_surface(surface, transform))
+            lambda: self._draw_manager.draw_image(image, transform))
 
     def draw_rectangle(self, transform: Transform, color: Color, layer=0) -> None:
         self._draw_calls[layer].append(
@@ -26,6 +28,10 @@ class CanvasManager:
     def draw_rectangle_border(self, transform: Transform, color: Color, border_thickness: int, layer=0) -> None:
         self._draw_calls[layer].append(
             lambda: self._draw_manager.draw_rectangle_border(transform, color, border_thickness))
+
+    def draw_text(self, text: Text, transform: Transform, layer=0) -> None:
+        self._draw_calls[layer].append(
+            lambda: self._draw_manager.draw_text(text, transform))
 
     def on_tick(self) -> None:
         self._draw_manager.fill(self._default_background_color)
