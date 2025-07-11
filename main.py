@@ -24,17 +24,21 @@ def f():
 
 
 def main():
-    canvas_surface = pygame.display.set_mode((1200, 800))
-
     pygame.init()
+
+    display_info = pygame.display.Info()
+    canvas_surface = pygame.display.set_mode((display_info.current_w, display_info.current_h))
+    # canvas_surface = pygame.display.set_mode((1200, 800))
 
     screen = Screen([
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
         # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
-        ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(150, 50), rotation=Rotation(0)),
+        ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 1000), rotation=Rotation(0)),
                                        "hello", f, WHITE, GRAY1)
     ])
+
+    print(canvas_surface.get_width(), canvas_surface.get_height())
 
     window = Window(caption="test",
                     global_manager=GlobalManager(
