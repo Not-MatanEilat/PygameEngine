@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pygame
 
-from engine.colors import WHITE, ORANGE, RED, YELLOW1, GREEN, CYAN2, GRAY1
+from engine.colors import WHITE, ORANGE, RED, YELLOW1, GREEN, CYAN2, GRAY1, GRAY33
 from engine.component.transform_component.position import Position
 from engine.component.transform_component.rotation import Rotation
 from engine.component.transform_component.scale import Scale
@@ -27,15 +27,15 @@ def main():
     pygame.init()
 
     display_info = pygame.display.Info()
-    canvas_surface = pygame.display.set_mode((display_info.current_w, display_info.current_h))
-    # canvas_surface = pygame.display.set_mode((1200, 800))
+    # canvas_surface = pygame.display.set_mode((display_info.current_w * 0.95, display_info.current_h * 0.90))
+    canvas_surface = pygame.display.set_mode((1200, 800))
 
     screen = Screen([
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
         # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
         ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 1000), rotation=Rotation(0)),
-                                       "hello", f, WHITE, GRAY1)
+                                       "hello", lambda: print("hello"), WHITE, GRAY1)
     ])
 
     print(canvas_surface.get_width(), canvas_surface.get_height())

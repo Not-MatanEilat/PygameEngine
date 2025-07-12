@@ -49,7 +49,6 @@ def create_transform_relative_to_canvas_size(old_transform: Transform, canvas_su
     y_position = RELATIVE_CANVAS_MULTIPLIER_SIZE * old_transform.position.y * canvas_surface.get_height()
     x_scale = RELATIVE_CANVAS_MULTIPLIER_SIZE * old_transform.scale.x * canvas_surface.get_width()
     y_scale = RELATIVE_CANVAS_MULTIPLIER_SIZE * old_transform.scale.y * canvas_surface.get_height()
-    print(int(old_transform.scale.x), int(old_transform.scale.y), int(x_scale), int(y_scale))
     return Transform(position=Position(x_position, y_position),
                      rotation=old_transform.rotation,
                      scale=Scale(x_scale, y_scale))

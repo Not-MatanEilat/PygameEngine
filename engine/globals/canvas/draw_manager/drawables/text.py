@@ -2,6 +2,8 @@ import pygame
 from pygame import Surface
 
 from engine.colors import Color
+from engine.component.transform_component.position import Position
+from engine.component.transform_component.transform import Transform
 from engine.component.ui_components.text_component.dynamic_font import DynamicFont
 
 

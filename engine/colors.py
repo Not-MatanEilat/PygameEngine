@@ -2,6 +2,22 @@ from typing import Tuple
 
 Color = Tuple[int, int, int]
 
+def lighten_color(color: Color) -> Color:
+    r, g, b = color
+    return (
+        min(255, int(r + (255 - r) * 1.2)),
+        min(255, int(g + (255 - g) * 1.2)),
+        min(255, int(b + (255 - b) * 1.2))
+    )
+
+def darken_color(color: Color) -> Color:
+    r, g, b = color
+    return (
+        min(255, int(r * (1 - 0.2))),
+        min(255, int(g * (1 - 0.2))),
+        min(255, int(b * (1 - 0.2)))
+    )
+
 ALICEBLUE = (240, 248, 255)
 ANTIQUEWHITE = (250, 235, 215)
 ANTIQUEWHITE1 = (255, 239, 219)

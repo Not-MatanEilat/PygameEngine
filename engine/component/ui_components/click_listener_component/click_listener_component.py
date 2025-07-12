@@ -19,7 +19,7 @@ class ClickListenerComponent(BaseComponent):
         self._transform_component = self.get_component(TransformComponent)
 
     def on_tick(self, event_tick: EventTick) -> None:
-        if event_tick.mouse_events.left_click.is_clicked:
+        if event_tick.mouse_events.left_click.is_released:
             if self._transform_component.collide_point(event_tick.mouse_events.position):
                 self._on_click()
 

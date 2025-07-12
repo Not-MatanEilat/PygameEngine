@@ -1,8 +1,14 @@
 import pygame
+from overrides import override
 
 from engine.colors import Color
 from engine.component.base_component import BaseComponent
+from engine.component.transform_component.position import Position
+from engine.component.transform_component.rotation import Rotation
+from engine.component.transform_component.scale import Scale
+from engine.component.transform_component.transform import Transform
 from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.ui_components.anchor.base_anchorer import BaseAnchorer
 from engine.component.ui_components.text_component.dynamic_font import DynamicFont
 from engine.globals.canvas.draw_manager.drawables.text import Text
 from engine.events.event_tick import EventTick
@@ -10,15 +16,21 @@ from engine.globals.global_manager import GlobalManager
 
 
 class TextComponent(BaseComponent):
-    def __init__(self, text: Text):
+    def __init__(self, text: Text, anchorer: BaseAnchorer):
         super().__init__()
         self._text = text
+        self._anchorer = anchorer
 
         self.transform_component: TransformComponent = None
 
+    @override
     def on_tick(self, event_tick: EventTick) -> None:
-        GlobalManager.get_instance().get_canvas_manager().draw_text(self._text, self.transform_component.transform)
+        anchored_transform = self._anchorer.anchor_transform(old_transform_scale=Scale(self._text.get_text_surface().get_width(), self._text.get_text_surface().get_height()),
+                                                             relative_transform=self.transform_component.transform)
 
+        GlobalManager.get_instance().get_canvas_manager().draw_text(self._text, anchored_transform)
+
+    @override
     def start(self) -> None:
         self.transform_component = self.get_component(TransformComponent)
 
