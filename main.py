@@ -1,6 +1,6 @@
 import pygame
 
-from engine.colors import WHITE, CYAN2, GRAY1
+from engine.colors import WHITE, CYAN2, GRAY1, RED, ORANGE
 from engine.component.normal_components.transform_component.transform_component import TransformComponent
 from engine.component.test_components.mouse_position_renderer import MousePositionRenderer
 from engine.component.normal_components.transform_component.position import Position
@@ -9,6 +9,8 @@ from engine.component.normal_components.transform_component.scale import Scale
 from engine.component.normal_components.transform_component.transform import Transform
 from engine.component.normal_components.transform_component.transform_builder import TransformBuilder
 from engine.component.test_components.original_mouse_position_renderer import OriginalMousePositionRenderer
+from engine.game_object.creator.moving_circle_game_object_creator import MovingCircleGameObjectCreator
+from engine.game_object.creator.moving_rect_game_object_creator import MovingRectGameObjectCreator
 from engine.game_object.game_object import GameObject
 from engine.game_object.ui_creator.button_game_object_creator import ButtonGameObjectCreator
 from engine.globals.canvas.canvas_manager import CanvasManager
@@ -27,8 +29,7 @@ def main():
     pygame.init()
 
     display_info = pygame.display.Info()
-    canvas_surface = pygame.display.set_mode((display_info.current_w * 0.95, display_info.current_h * 0.90))
-    # canvas_surface = pygame.display.set_mode((1200, 800))
+    canvas_surface = pygame.display.set_mode((1200, 800))
 
     game_object = GameObject()
     game_object.add_component(TransformComponent(TransformBuilder().create_component()))
@@ -38,8 +39,10 @@ def main():
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
         # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
-        ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 400), rotation=Rotation(0)),
-                                       "hello", 25, lambda: print("hello"), WHITE, GRAY1),
+        # ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 400), rotation=Rotation(0)),
+        #                                "hello", 25, lambda: print("hello"), WHITE, GRAY1),
+        MovingCircleGameObjectCreator.create(Position(50, 50), 0.05, RED),
+        MovingRectGameObjectCreator.create(Position(550, 50), -0.05, ORANGE),
         game_object
     ])
 

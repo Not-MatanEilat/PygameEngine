@@ -8,6 +8,8 @@ from engine.globals.canvas.canvas_relative_transformer import CanvasRelativeTran
 from engine.globals.canvas.draw_manager.drawables.image import Image
 from engine.globals.canvas.draw_manager.drawables.text import Text
 
+FILLED_CIRCLE_WIDTH = 0
+
 
 class DrawManager:
     def __init__(self, canvas_surface: Surface):
@@ -36,6 +38,14 @@ class DrawManager:
         pygame.draw.rect(surface=self._canvas_surface,
                          color=color,
                          rect=(new_transform.position.x, new_transform.position.y, new_transform.scale.x, new_transform.scale.y))
+
+    def draw_circle(self, transform: Transform, radius: float, color: Color) -> None:
+        new_transform = self._canvas_relative_transformer.create_transform_relative_to_canvas(transform)
+        pygame.draw.circle(surface=self._canvas_surface,
+                           color=color,
+                           center=(transform.position.x, transform.position.y),
+                           radius=radius,
+                           width=FILLED_CIRCLE_WIDTH)
 
     def draw_rectangle_border(self, transform: Transform, color: Color, border_thickness) -> None:
         new_transform = self._canvas_relative_transformer.create_transform_relative_to_canvas(transform)

@@ -25,6 +25,10 @@ class CanvasManager:
         self._draw_calls[layer].append(
             lambda: self._draw_manager.draw_rectangle(transform, color))
 
+    def draw_circle(self, transform: Transform, radius: float, color: Color, layer=0) -> None:
+        self._draw_calls[layer].append(
+            lambda: self._draw_manager.draw_circle(transform, radius, color))
+
     def draw_rectangle_border(self, transform: Transform, color: Color, border_thickness: int, layer=0) -> None:
         self._draw_calls[layer].append(
             lambda: self._draw_manager.draw_rectangle_border(transform, color, border_thickness))
