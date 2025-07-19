@@ -10,7 +10,7 @@ DEFAULT_TEXT = "<place holder>"
 
 DEFAULT_COLOR = BLACK
 
-DEFAULT_SIZE = 30
+DEFAULT_SIZE = 100
 
 
 class TextBuilder:

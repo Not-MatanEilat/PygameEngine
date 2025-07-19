@@ -25,7 +25,6 @@ class ButtonRendererComponent(BaseComponent):
     @override
     def on_tick(self, event_tick: EventTick) -> None:
 
-        EngineLogger.debug(f"Transform {self._transform_component.transform.position.x}")
         rect_color = self._color
         if CollisionChecker.rect_collides_point(self._transform_component.transform, event_tick.mouse_events.position) and event_tick.mouse_events.left_click.is_down:
             rect_color = darken_color(self._color)
