@@ -15,6 +15,9 @@ class BaseComponent(ABC):
     def get_component(self, component_type: Type[BaseComponent]) -> BaseComponent:
         return self._game_object.get_component(component_type)
 
+    def has_component(self, component_type: Type[BaseComponent]) -> bool:
+        return self._game_object.has_component(component_type)
+
     def set_game_object(self, entity: GameObject) -> None:
         self._game_object = entity
 

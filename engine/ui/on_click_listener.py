@@ -3,8 +3,8 @@ from typing import Callable, List
 
 import pygame
 
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component import TransformComponent
 
 OnClickCallable = Callable[[], None]
 

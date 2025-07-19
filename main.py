@@ -1,18 +1,17 @@
-from pathlib import Path
-
 import pygame
 
-from engine.colors import WHITE, ORANGE, RED, YELLOW1, GREEN, CYAN2, GRAY1, GRAY33
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.rotation import Rotation
-from engine.component.transform_component.scale import Scale
-from engine.component.transform_component.transform import Transform
-from engine.component.transform_component.transform_component_builder import TransformComponentBuilder
-from engine.game_object.creator.rectangle_game_object_creator import RectangleGameObjectCreator
-from engine.game_object.creator.test_game_object_creator import TestGameObjectCreator
+from engine.colors import WHITE, CYAN2, GRAY1
+from engine.component.test_components.mouse_position_renderer import MousePositionRenderer
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.rotation import Rotation
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.transform_component_builder import TransformComponentBuilder
+from engine.component.test_components.original_mouse_position_renderer import OriginalMousePositionRenderer
+from engine.game_object.game_object import GameObject
 from engine.game_object.ui_creator.button_game_object_creator import ButtonGameObjectCreator
-from engine.game_object.ui_creator.text_game_object_creator import TextGameObjectCreator
 from engine.globals.canvas.canvas_manager import CanvasManager
+from engine.globals.canvas.canvas_relative_transformer import CanvasRelativeTransformer
 from engine.globals.canvas.draw_manager.draw_manager import DrawManager
 from engine.globals.global_manager import GlobalManager
 from engine.screen.screen import Screen
@@ -27,23 +26,21 @@ def main():
     pygame.init()
 
     display_info = pygame.display.Info()
-    # canvas_surface = pygame.display.set_mode((display_info.current_w * 0.95, display_info.current_h * 0.90))
-    canvas_surface = pygame.display.set_mode((1200, 800))
+    canvas_surface = pygame.display.set_mode((display_info.current_w * 0.95, display_info.current_h * 0.90))
+    # canvas_surface = pygame.display.set_mode((1200, 800))
 
     screen = Screen([
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
         # RectangleGameObjectCreator.create(YELLOW1, 2, 75, 50)
-        ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 1000), rotation=Rotation(0)),
-                                       "hello", lambda: print("hello"), WHITE, GRAY1)
+        ButtonGameObjectCreator.create(Transform(position=Position(0, 0), scale=Scale(600, 400), rotation=Rotation(0)),
+                                       "hello", 25, lambda: print("hello"), WHITE, GRAY1),
     ])
-
-    print(canvas_surface.get_width(), canvas_surface.get_height())
 
     window = Window(caption="test",
                     global_manager=GlobalManager(
                         canvas_manager=CanvasManager(
-                            draw_manager=DrawManager(canvas_surface),
+                            draw_manager=DrawManager(canvas_surface=canvas_surface),
                             default_background_color=CYAN2),
                         starter_screen=screen))
     window.init()

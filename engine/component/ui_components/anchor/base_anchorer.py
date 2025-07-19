@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from engine.component.transform_component.scale import Scale
-from engine.component.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
 
 
 class BaseAnchorer(ABC):

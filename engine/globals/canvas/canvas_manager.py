@@ -2,10 +2,10 @@ from typing import Dict, Callable, List
 
 from collections import defaultdict
 
-from pygame import Surface
-
 from engine.colors import Color
-from engine.component.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
+from engine.globals.canvas.canvas_relative_transformer import CanvasRelativeTransformer
 from engine.globals.canvas.draw_manager.draw_manager import DrawManager
 from engine.globals.canvas.draw_manager.drawables.image import Image
 from engine.globals.canvas.draw_manager.drawables.text import Text
@@ -42,3 +42,5 @@ class CanvasManager:
 
         self._draw_calls.clear()
 
+    def get_relative_canvas_transformer(self) -> CanvasRelativeTransformer:
+        return self._draw_manager.get_canvas_relative_transformer()

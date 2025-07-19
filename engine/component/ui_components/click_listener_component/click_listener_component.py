@@ -1,8 +1,9 @@
 from typing import Callable
 
 from engine.component.base_component import BaseComponent
-from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.normal_components.transform_component.transform_component import TransformComponent
 from engine.events.event_tick import EventTick
+from engine.logger.logger import EngineLogger
 
 OnClickCallable = Callable[[], None]
 

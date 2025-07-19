@@ -1,10 +1,7 @@
 import math
 
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.transform import Transform
-from engine.component.transform_component.rotation import Rotation
-from engine.component.transform_component.scale import Scale
-from engine.logger.logger import EngineLogger
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.transform import Transform
 
 
 class CollisionChecker:

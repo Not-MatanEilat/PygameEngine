@@ -54,6 +54,12 @@ class GameObject:
 
         raise ComponentNotFoundException("Did not find the requested component to get")
 
+    def has_component(self, component_type: Type[BaseComponent]) -> bool:
+        for component in self.__components:
+            if isinstance(component, component_type):
+                return True
+
+        return False
 
 def is_component_type_in_list(component_type: Type[BaseComponent], list_of_components: List[BaseComponent]) -> bool:
     return any(isinstance(iterating_component, component_type) for iterating_component in list_of_components)

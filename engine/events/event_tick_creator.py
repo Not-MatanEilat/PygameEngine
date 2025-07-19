@@ -3,13 +3,17 @@ from typing import List, Dict
 import pygame.event
 from pygame.key import ScancodeWrapper
 
-from engine.component.transform_component.position import Position
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.scale import Scale
 from engine.events.event_tick import EventTick
 from engine.events.keyboard_events.key import Key
 from engine.events.keyboard_events.key_properties import KeyProperties
 from engine.events.keyboard_events.keyboard_events import KeyboardEvents
 from engine.events.mouse_events.click_properties import ClickProperties
 from engine.events.mouse_events.mouse_events import MouseEvents
+from engine.globals.canvas.canvas_relative_transformer import CanvasRelativeTransformer
+from engine.globals.global_manager import GlobalManager
+from engine.logger.logger import EngineLogger
 
 
 class EventTickCreator:
@@ -96,8 +100,11 @@ def create_mouse_events(last_event_tick: EventTick) -> MouseEvents:
 
 def get_mouse_position() -> Position:
     mouse_x, mouse_y = pygame.mouse.get_pos()
-    return Position(mouse_x, mouse_y)
-
+    return GlobalManager.get_instance().get_canvas_manager().get_relative_canvas_transformer().\
+            create_point_relative_to_canvas(Position(mouse_x, mouse_y))
+    # EngineLogger.debug(f"mouse {mouse_x, mouse_y}")
+    # EngineLogger.debug(f"mouse {mouse_x, mouse_y}")
+    # return Position(mouse_x, mouse_y)
 
 def create_click_properties(is_click_down: bool, last_tick_click_properties: ClickProperties) -> ClickProperties:
     return ClickProperties(

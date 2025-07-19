@@ -1,9 +1,9 @@
 from overrides import override
 
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.rotation import Rotation
-from engine.component.transform_component.scale import Scale
-from engine.component.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.rotation import Rotation
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
 from engine.component.ui_components.anchor.base_anchorer import BaseAnchorer
 
 

@@ -2,11 +2,11 @@ from typing import List
 
 import pygame
 
-from engine.collision_checker import CollisionChecker
+from engine.collision.collision_checker import CollisionChecker
 from engine.colors import RED
 from engine.component.base_component import BaseComponent
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.transform import Transform
 from engine.events.event_tick import EventTick
 from engine.globals.global_manager import GlobalManager
 
@@ -29,7 +29,7 @@ class TransformComponent(BaseComponent):
 
     def collide_point(self, point: Position) -> bool:
         # there is no reason to check collision as a rotated rectangle if the angle is normalized
-        # calculating the collision as a rotated rectangle requires trigonometry which are considered
+        # calculating the collision as a rotated rectangle requires trigonometry functions which are considered
         # very heavy calculating functions
         if is_normalized_angle(self.transform.rotation.degrees):
             return CollisionChecker.rect_collides_point(transform=self.transform,

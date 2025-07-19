@@ -1,8 +1,8 @@
-from engine.component.transform_component.position import Position
-from engine.component.transform_component.rotation import Rotation
-from engine.component.transform_component.scale import Scale
-from engine.component.transform_component.transform import Transform
-from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.rotation import Rotation
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
+from engine.component.normal_components.transform_component.transform_component import TransformComponent
 
 
 class TransformComponentBuilder:

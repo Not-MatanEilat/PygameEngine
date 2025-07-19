@@ -1,11 +1,12 @@
 from overrides import override
 
-from engine.collision_checker import CollisionChecker
-from engine.colors import Color, lighten_color, darken_color
+from engine.collision.collision_checker import CollisionChecker
+from engine.colors import Color, darken_color
 from engine.component.base_component import BaseComponent
-from engine.component.transform_component.transform_component import TransformComponent
+from engine.component.normal_components.transform_component.transform_component import TransformComponent
 from engine.events.event_tick import EventTick
 from engine.globals.global_manager import GlobalManager
+from engine.logger.logger import EngineLogger
 
 
 class ButtonRendererComponent(BaseComponent):
@@ -24,6 +25,7 @@ class ButtonRendererComponent(BaseComponent):
     @override
     def on_tick(self, event_tick: EventTick) -> None:
 
+        EngineLogger.debug(f"Transform {self._transform_component.transform.position.x}")
         rect_color = self._color
         if CollisionChecker.rect_collides_point(self._transform_component.transform, event_tick.mouse_events.position) and event_tick.mouse_events.left_click.is_down:
             rect_color = darken_color(self._color)

@@ -2,6 +2,11 @@ from typing import List
 
 import pygame.event
 
+from engine.colors import RED
+from engine.component.normal_components.transform_component.position import Position
+from engine.component.normal_components.transform_component.rotation import Rotation
+from engine.component.normal_components.transform_component.scale import Scale
+from engine.component.normal_components.transform_component.transform import Transform
 from engine.events.event_tick import EventTick
 from engine.game_object.game_object import GameObject
 from engine.logger.logger import EngineLogger
@@ -20,6 +25,7 @@ class Screen:
 
     def get_game_objects(self) -> List[GameObject]:
         return self._game_objects
+
 
     def tick_game_objects(self, event_tick: EventTick) -> None:
         for game_object in self._game_objects:

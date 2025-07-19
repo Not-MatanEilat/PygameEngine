@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from engine.component.transform_component.position import Position
+from engine.component.normal_components.transform_component.position import Position
 from engine.events.mouse_events.click_properties import ClickProperties
 
 
