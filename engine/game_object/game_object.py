@@ -10,12 +10,15 @@ if TYPE_CHECKING:
 
     ComponentType = TypeVar('ComponentType', bound=BaseComponent)
 
-
+DEFAULT_NAME = "Unnamed"
 
 class GameObject:
-    def __init__(self, layer=0):
+    def __init__(self, name: str=DEFAULT_NAME, tag: str="", layer=0):
         self.__components: List[BaseComponent] = []
         self.__layer = layer
+
+        self._name = name
+        self._tag = tag
 
     def init(self) -> None:
         self.set_game_object_for_components()
@@ -64,6 +67,16 @@ class GameObject:
                 return True
 
         return False
+
+    def on_collision(self, other_game_object: GameObject) -> None:
+        for component in self.__components:
+            component.on_collision(other_game_object)
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_tag(self) -> str:
+        return self._tag
 
 def is_component_type_in_list(component_type: Type[BaseComponent], list_of_components: List[BaseComponent]) -> bool:
     return any(isinstance(iterating_component, component_type) for iterating_component in list_of_components)

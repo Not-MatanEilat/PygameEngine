@@ -1,3 +1,5 @@
+from imaplib import Debug
+
 from engine.colors import RED, Color
 from engine.component.normal_components.circle_renderer_component.circle_renderer_component import \
     CircleRendererComponent
@@ -17,10 +19,9 @@ from engine.logger.logger import EngineLogger
 class MovingCircleGameObjectCreator:
     @staticmethod
     def create(start_position: Position, moving_force: float, color: Color) -> GameObject:
-        game_object = GameObject()
+        game_object = GameObject(tag="circle")
         game_object.add_component(TransformComponent(TransformBuilder().set_scale(250, 50).set_position(start_position.x, start_position.y).create_component()))
         game_object.add_component(ColliderComponent(CircleCollider(125)))
-        game_object.get_component(ColliderComponent).add_on_collision_callable(lambda other: EngineLogger.debug("check"))
         game_object.add_component(MovingForceComponent(moving_force))
         game_object.add_component(CircleRendererComponent(125, color))
 

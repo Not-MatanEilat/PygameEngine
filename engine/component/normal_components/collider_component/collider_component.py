@@ -22,7 +22,6 @@ class ColliderComponent(BaseComponent):
 
         self._transform_component: TransformComponent = None
         self._collider = collider
-        self._on_collision_callables: list[OnCollisionCallable] = []
 
     @override
     def start(self) -> None:
@@ -41,18 +40,13 @@ class ColliderComponent(BaseComponent):
                 continue
 
             if intersects(self.get_geometry_from_collider(), other_collider_component.get_geometry_from_collider()):
-                self.__run_on_collision_callables(other_game_object)
+                self.__run_on_collision(other_game_object)
 
     def get_geometry_from_collider(self) -> BaseGeometry:
         return self._collider.get_base_geometry(self._transform_component.transform.position)
 
-    def __run_on_collision_callables(self, collided_game_object: GameObject,) -> None:
-        for on_collision_callable in self._on_collision_callables:
-            on_collision_callable(collided_game_object)
-
-    def add_on_collision_callable(self, on_collision: OnCollisionCallable) -> None:
-        self._on_collision_callables.append(on_collision)
-
+    def __run_on_collision(self, collided_game_object: GameObject) -> None:
+        self.get_game_object().on_collision(collided_game_object)
 
 def intersects(first_collider: BaseGeometry, second_collider: BaseGeometry) -> bool:
     return not first_collider.intersection(second_collider).is_empty

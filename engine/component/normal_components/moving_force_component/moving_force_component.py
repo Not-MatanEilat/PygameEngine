@@ -2,6 +2,8 @@ from engine.component.base_component import BaseComponent
 from engine.component.normal_components.transform_component.position import Position
 from engine.component.normal_components.transform_component.transform_component import TransformComponent
 from engine.events.event_tick import EventTick
+from engine.game_object.game_object import GameObject
+from engine.logger.logger import EngineLogger
 
 
 class MovingForceComponent(BaseComponent):
@@ -16,3 +18,9 @@ class MovingForceComponent(BaseComponent):
 
     def on_tick(self, event_tick: EventTick) -> None:
         self._transform_component.transform.position += Position(self._moving_force, 0)
+
+    def on_collision(self, collided_game_object: GameObject) -> None:
+        if collided_game_object.get_tag() == "circle":
+            EngineLogger.debug("Collided with circle")
+        if collided_game_object.get_tag() == "rect":
+            EngineLogger.debug("Collided with rect")

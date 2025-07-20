@@ -14,10 +14,9 @@ from engine.logger.logger import EngineLogger
 class MovingRectGameObjectCreator:
     @staticmethod
     def create(start_position: Position, moving_force: float, color: Color) -> GameObject:
-        game_object = GameObject()
+        game_object = GameObject(tag="rect")
         game_object.add_component(TransformComponent(TransformBuilder().set_scale(250, 50).set_position(start_position.x, start_position.y).create_component()))
         game_object.add_component(ColliderComponent(BoxCollider(250, 50)))
-        game_object.get_component(ColliderComponent).add_on_collision_callable(lambda other: EngineLogger.debug("check"))
         game_object.add_component(MovingForceComponent(moving_force))
         game_object.add_component(RectangleRendererComponent(color))
 
