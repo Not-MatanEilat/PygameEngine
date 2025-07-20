@@ -21,6 +21,6 @@ class MovingForceComponent(BaseComponent):
 
     def on_collision(self, collided_game_object: GameObject) -> None:
         if collided_game_object.get_tag() == "circle":
-            EngineLogger.debug("Collided with circle")
+            EngineLogger.debug(f"Collided with circle and {collided_game_object.get_instance_id()}")
         if collided_game_object.get_tag() == "rect":
-            EngineLogger.debug("Collided with rect")
+            EngineLogger.debug(f"Collided with rect and {collided_game_object.get_instance_id()}")

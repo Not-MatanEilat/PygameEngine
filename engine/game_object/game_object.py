@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from uuid import uuid4, UUID
 from typing import List, Type, TYPE_CHECKING, TypeVar
 
 from engine.events.event_tick import EventTick
@@ -12,6 +13,11 @@ if TYPE_CHECKING:
 
 DEFAULT_NAME = "Unnamed"
 
+
+def generate_instance_id() -> UUID:
+    return uuid4()
+
+
 class GameObject:
     def __init__(self, name: str=DEFAULT_NAME, tag: str="", layer=0):
         self.__components: List[BaseComponent] = []
@@ -19,6 +25,7 @@ class GameObject:
 
         self._name = name
         self._tag = tag
+        self._instance_id = generate_instance_id()
 
     def init(self) -> None:
         self.set_game_object_for_components()
@@ -77,6 +84,10 @@ class GameObject:
 
     def get_tag(self) -> str:
         return self._tag
+
+    def get_instance_id(self) -> UUID:
+        return self._instance_id
+
 
 def is_component_type_in_list(component_type: Type[BaseComponent], list_of_components: List[BaseComponent]) -> bool:
     return any(isinstance(iterating_component, component_type) for iterating_component in list_of_components)
