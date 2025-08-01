@@ -1,6 +1,7 @@
 import pygame
 
 from engine.colors import WHITE, CYAN2, GRAY1, RED, ORANGE
+from engine.component.normal_components.camera_moving_component.camera_moving_component import CameraMovingComponent
 from engine.component.normal_components.transform_component.transform_component import TransformComponent
 from engine.component.test_components.mouse_position_renderer import MousePositionRenderer
 from engine.component.normal_components.transform_component.position import Position
@@ -35,6 +36,10 @@ def main():
     game_object.add_component(TransformComponent(TransformBuilder().create_component()))
     game_object.add_component(MousePositionRenderer())
 
+    camera_mover_game_object = GameObject()
+    camera_mover_game_object.add_component(TransformComponent(TransformBuilder().create_component()))
+    camera_mover_game_object.add_component(CameraMovingComponent(5))
+
     screen = Screen([
         # RectangleGameObjectCreator.create(ORANGE, 0, 25, 0),
         # RectangleGameObjectCreator.create(RED, 4, 50, 25),
@@ -43,7 +48,8 @@ def main():
         #                                "hello", 25, lambda: print("hello"), WHITE, GRAY1),
         MovingCircleGameObjectCreator.create(Position(50, 50), 0.05, RED),
         MovingRectGameObjectCreator.create(Position(550, 50), -0.05, ORANGE),
-        game_object
+        game_object,
+        camera_mover_game_object
     ])
 
     window = Window(caption="test",

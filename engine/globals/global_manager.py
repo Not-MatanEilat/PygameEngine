@@ -3,11 +3,12 @@ from typing import TYPE_CHECKING
 
 
 from engine.game_object.game_object import GameObject
-from engine.globals.canvas.canvas_manager import CanvasManager
 from engine.globals.exceptions import GlobalsNotInitiatedException
 
 if TYPE_CHECKING:
     from engine.screen.screen import Screen
+    from engine.globals.canvas.canvas_manager import CanvasManager
+
 
 
 class GlobalManager:

@@ -1,3 +1,4 @@
+from imaplib import Debug
 from typing import List, Dict
 
 import pygame.event
@@ -71,18 +72,19 @@ class EventTickCreator:
 
 
 def create_keyboard_events(last_event_tick: EventTick) -> KeyboardEvents:
-    keys_pressed = pygame.key.get_just_pressed()
+    keys_pressed = pygame.key.get_pressed()
+
     keys_pressed_wrapper_dict: Dict[Key, KeyProperties] = {}
     for keycode in Key:
-        current_key_properties = last_event_tick.keyboard_events.get_key(Key(keycode))
+        last_key_properties = last_event_tick.keyboard_events.get_key(Key(keycode))
 
         is_key_currently_pressed = keys_pressed[keycode.value]
 
         keys_pressed_wrapper_dict[Key(keycode)] = KeyProperties(
-            is_pressed=is_pressed(is_key_currently_pressed, current_key_properties),
-            is_hold=is_key_hold(is_key_currently_pressed, current_key_properties),
-            is_down=is_key_hold(is_key_currently_pressed, current_key_properties) or is_pressed(is_key_currently_pressed, current_key_properties),
-            is_released=is_key_released(is_key_currently_pressed, current_key_properties)
+            is_pressed=is_pressed(is_key_currently_pressed, last_key_properties),
+            is_hold=is_key_hold(is_key_currently_pressed, last_key_properties),
+            is_down=is_key_hold(is_key_currently_pressed, last_key_properties) or is_pressed(is_key_currently_pressed, last_key_properties),
+            is_released=is_key_released(is_key_currently_pressed, last_key_properties)
         )
 
     return KeyboardEvents(
@@ -102,9 +104,6 @@ def get_mouse_position() -> Position:
     mouse_x, mouse_y = pygame.mouse.get_pos()
     return GlobalManager.get_instance().get_canvas_manager().get_relative_canvas_transformer().\
             create_point_relative_to_canvas(Position(mouse_x, mouse_y))
-    # EngineLogger.debug(f"mouse {mouse_x, mouse_y}")
-    # EngineLogger.debug(f"mouse {mouse_x, mouse_y}")
-    # return Position(mouse_x, mouse_y)
 
 def create_click_properties(is_click_down: bool, last_tick_click_properties: ClickProperties) -> ClickProperties:
     return ClickProperties(
@@ -124,7 +123,7 @@ def is_click_released(is_currently_down: bool, last_tick_click_properties: Click
     return not is_currently_down and last_tick_click_properties.is_down
 
 def is_pressed(is_currently_down: bool, last_tick_key_properties: KeyProperties) -> bool:
-    return last_tick_key_properties.is_down and is_currently_down
+    return not last_tick_key_properties.is_down and is_currently_down
 
 def is_key_hold(is_currently_down: bool, last_tick_key_properties: KeyProperties) -> bool:
     return is_currently_down and last_tick_key_properties.is_down

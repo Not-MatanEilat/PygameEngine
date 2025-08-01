@@ -1,6 +1,7 @@
 from typing import List
 
 import pygame.event
+from pygame import KEYDOWN
 
 from engine.colors import RED
 from engine.component.normal_components.transform_component.position import Position
@@ -13,12 +14,15 @@ from engine.logger.logger import EngineLogger
 from engine.events.event_tick_creator import EventTickCreator
 
 from engine.globals.global_manager import GlobalManager
+from engine.screen.camera.camera import Camera
+from engine.screen.camera.camera_creator import CameraCreator
 
 
 class Screen:
     def __init__(self, game_objects: List[GameObject]):
         self._game_objects = game_objects
         self._running = True
+        self._camera = CameraCreator.create_camera()
 
     def add_game_object(self, game_object: GameObject) -> None:
         self._game_objects.append(game_object)
@@ -26,10 +30,14 @@ class Screen:
     def get_game_objects(self) -> List[GameObject]:
         return self._game_objects
 
+    def get_camera(self) -> Camera:
+        return self._camera
 
     def tick_game_objects(self, event_tick: EventTick) -> None:
         for game_object in self._game_objects:
             game_object.tick_components(event_tick)
+
+        self._camera.on_tick(event_tick)
 
 
     def init_screen(self) -> None:
@@ -37,13 +45,15 @@ class Screen:
         for game_object in self.get_game_objects():
             game_object.init()
 
+        self._camera.init()
+
     def finish(self) -> None:
         self._running = False
+
 
     def run(self) -> None:
         self.init_screen()
         global_manager = GlobalManager.get_instance()
-
         event_tick = EventTickCreator.create_empty_event_tick()
 
         while self._running:

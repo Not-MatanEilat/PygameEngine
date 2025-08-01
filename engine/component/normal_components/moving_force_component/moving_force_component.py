@@ -20,7 +20,8 @@ class MovingForceComponent(BaseComponent):
         self._transform_component.transform.position += Position(self._moving_force, 0)
 
     def on_collision(self, collided_game_object: GameObject) -> None:
-        if collided_game_object.get_tag() == "circle":
-            EngineLogger.debug(f"Collided with circle and {collided_game_object.get_instance_id()}")
-        if collided_game_object.get_tag() == "rect":
-            EngineLogger.debug(f"Collided with rect and {collided_game_object.get_instance_id()}")
+        ...
+        # if collided_game_object.get_tag() == "circle":
+        #     EngineLogger.debug(f"Collided with circle and {collided_game_object.get_instance_id()}")
+        # if collided_game_object.get_tag() == "rect":
+        #     EngineLogger.debug(f"Collided with rect and {collided_game_object.get_instance_id()}")
